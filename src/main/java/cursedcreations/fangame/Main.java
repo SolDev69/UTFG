@@ -62,18 +62,24 @@ public class Main {
     private void loop() {
         GL.createCapabilities(); // Initialize OpenGL bindings
         double yPos = 0.0;
+        double xPos = 0.0;
 
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the framebuffer
             // Rendering code goes here
-            Pellet pellet = new Pellet(2);
-            double pF = -1.0 / 1000.0;
-            pellet.render(yPos);
-
-            yPos -= pF * pellet.getHeight(); // Move the pellet downwards
+            int pelletSize=10;
+            Pellet pellet = new Pellet(pelletSize, yPos, xPos);
+            Character character = new Character(pelletSize, -0.5,0);
+            double pelletFall = -1.0 / 1000.0;
+            pellet.render();
+            pellet.ymin = yPos;
+            yPos -= pelletFall * pellet.getHeight(); // Move the pellet downwards
             if (yPos > 2.0) {
                 yPos = 0.0; // Reset position when pellet goes off-screen
+                xPos = MathUtils.getRandomDoubleInclusiveD(-.5/pelletSize,.5/pelletSize);
             }
+            handleInput(character);
+            character.render();
             glfwSwapBuffers(window); // Swap the color buffers
             glfwPollEvents(); // Poll for window events
         }
@@ -82,5 +88,21 @@ public class Main {
 
     public static void main(String[] args) {
         new Main().run();
+    }
+
+
+    private void handleInput(Character character) {
+        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+            character.moveUp();
+        }
+        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+            character.moveDown();
+        }
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+            character.moveLeft();
+        }
+        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+            character.moveRight();
+        }
     }
 }
