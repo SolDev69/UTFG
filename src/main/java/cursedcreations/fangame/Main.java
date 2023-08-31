@@ -5,7 +5,7 @@ import org.lwjgl.opengl.*;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.opengl.GL46.*;
 
 import org.lwjgl.stb.STBImage;
 
@@ -88,7 +88,10 @@ public class Main {
 
     public static void main(String[] args) {
         new Main().run();
+        Object runnable = () -> System.out.println("Hi");
+        runnable.render();
     }
+
 
 
     private void handleInput(Character character) {

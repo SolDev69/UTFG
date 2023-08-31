@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.opengl.GL11.*;
 
 
-public class Pellet {
+public class Pellet implements Object {
     int size;
 //    double[][] vertices = new double[4][2];
     double xmin, ymin;

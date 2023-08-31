@@ -1,8 +1,8 @@
 package cursedcreations.fangame;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL46.*;
 
-public class Character {
+public class Character implements Object {
     private double x;
     private double y;
     private double speed;
