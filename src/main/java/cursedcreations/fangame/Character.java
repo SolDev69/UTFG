@@ -1,32 +1,43 @@
 package cursedcreations.fangame;
 
+import static cursedcreations.fangame.Utils.print;
 import static org.lwjgl.opengl.GL46.*;
 
 public class Character implements Object {
+    private double width;
     private double x;
     private double y;
     private double speed;
 
-    public Character(double x, double y, double speed) {
+    public Character(double x, double y, double speed, double width) {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        this.width = width;
     }
 
     public void moveUp() {
-        y += speed;
+        if (y + (1/width) <= 1) {
+            y += speed;
+        } else { print(y); }
     }
 
     public void moveDown() {
-        y -= speed;
+        if (y >= -1) {
+            y -= speed;
+        } else { print(y); }
     }
 
     public void moveLeft() {
-        x -= speed;
+        if (x >= -1) {
+            x -= speed;
+        } else { print(x); }
     }
 
     public void moveRight() {
-        x += speed;
+        if (x + (1/width) <= 1) {
+            x += speed;
+        } else { print(x); }
     }
 
     public void render() {
@@ -39,9 +50,9 @@ public class Character implements Object {
 //        glEnd();
         glBegin(GL_QUADS);
         glVertex2d(x,y);
-        glVertex2d(x+(1.0/5), y);
-        glVertex2d(x+(1.0/5),y+(1.0/5));
-        glVertex2d(x, y+(1.0/5));
+        glVertex2d(x+(1.0/width), y);
+        glVertex2d(x+(1.0/width),y+(1.0/(width * 2)));
+        glVertex2d(x, y+(1.0/(width * 2)));
         glEnd();
     }
 

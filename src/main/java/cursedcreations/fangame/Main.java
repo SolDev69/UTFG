@@ -1,15 +1,10 @@
 package cursedcreations.fangame;
 
-import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL46.*;
-
-import org.lwjgl.stb.STBImage;
-
-import java.nio.ByteBuffer;
 
 public class Main {
     private long window; // Handle to the window
@@ -63,7 +58,7 @@ public class Main {
         GL.createCapabilities(); // Initialize OpenGL bindings
         double yPos = 0.0;
         double xPos = 0.0;
-        Character character = new Character(-0.5, 0, 0.1);
+        Character character = new Character(-0.5, 0, 0.04, 5);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the framebuffer
             // Rendering code goes here
@@ -75,7 +70,7 @@ public class Main {
             yPos -= pelletFall * pellet.getHeight(); // Move the pellet downwards
             if (yPos > 2.0) {
                 yPos = 0.0; // Reset position when pellet goes off-screen
-                xPos = MathUtils.getRandomDoubleInclusiveD(-.5/pelletSize,.5/pelletSize);
+                xPos = Utils.getRandomDoubleInclusiveD(-.5/pelletSize,.5/pelletSize);
             }
             handleInput(character);
             character.render();
