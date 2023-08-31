@@ -63,14 +63,13 @@ public class Main {
         GL.createCapabilities(); // Initialize OpenGL bindings
         double yPos = 0.0;
         double xPos = 0.0;
-
+        Character character = new Character(-0.5, 0, 0.1);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the framebuffer
             // Rendering code goes here
             int pelletSize=10;
             Pellet pellet = new Pellet(pelletSize, yPos, xPos);
-            Character character = new Character(pelletSize, -0.5,0);
-            double pelletFall = -1.0 / 1000.0;
+            double pelletFall = -1.0 / 10.0;
             pellet.render();
             pellet.ymin = yPos;
             yPos -= pelletFall * pellet.getHeight(); // Move the pellet downwards

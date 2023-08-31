@@ -23,7 +23,7 @@ public class Pellet implements Object {
     }
 
     public void render() {
-        glColor3f(1.0f, 0.0f, 0.0f); // Set color to red
+        glColor3f(1.0f, 1.0f, 1.0f); // Set color to red
         glBegin(GL_QUADS);
 //        glVertex2f(x, y);
 //        glVertex2f(x + width, y);

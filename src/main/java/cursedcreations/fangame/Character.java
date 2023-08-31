@@ -39,9 +39,9 @@ public class Character implements Object {
 //        glEnd();
         glBegin(GL_QUADS);
         glVertex2d(x,y);
-        glVertex2d(x+(1.0/speed), y);
-        glVertex2d(x+(1.0/speed),y+(1.0/speed));
-        glVertex2d(x, y+(1.0/speed));
+        glVertex2d(x+(1.0/5), y);
+        glVertex2d(x+(1.0/5),y+(1.0/5));
+        glVertex2d(x, y+(1.0/5));
         glEnd();
     }
 
