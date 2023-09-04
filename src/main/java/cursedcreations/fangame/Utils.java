@@ -11,4 +11,8 @@ public class Utils {
     static void print(java.lang.Object o) {
         System.out.println(o);
     }
+
+    static boolean isCollided (Character character, Pellet pellet) {
+        return (character.getX() <= pellet.x) && (pellet.y <= (character.getY()+character.getHeight()));
+    }
 }

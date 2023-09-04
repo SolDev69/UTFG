@@ -2,6 +2,8 @@ package cursedcreations.fangame;
 
 import org.lwjgl.opengl.*;
 
+import java.util.ArrayList;
+
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL46.*;
@@ -53,22 +55,25 @@ public class Main {
         // Make the window visible
         glfwShowWindow(window);
     }
-
+    ArrayList<Pellet> pellets = new ArrayList<>();
     private void loop() {
         GL.createCapabilities(); // Initialize OpenGL bindings
         double yPos = 0.0;
         double xPos = 0.0;
-        Character character = new Character(-0.5, 0, 0.04, 5);
+        Character character = new Character(-0.5, -1, 0.04, 5);
         while (!glfwWindowShouldClose(window)) {
+
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the framebuffer
+            instance = this;
             // Rendering code goes here
             int pelletSize=10;
             Pellet pellet = new Pellet(pelletSize, yPos, xPos);
+            pellets.add(pellet);
             double pelletFall = -1.0 / 10.0;
             pellet.render();
             pellet.ymin = yPos;
             yPos -= pelletFall * pellet.getHeight(); // Move the pellet downwards
-            if (yPos > 2.0) {
+            if (yPos > 2.0 || Utils.isCollided(character, pellet)) {
                 yPos = 0.0; // Reset position when pellet goes off-screen
                 xPos = Utils.getRandomDoubleInclusiveD(-.5/pelletSize,.5/pelletSize);
             }
@@ -79,22 +84,22 @@ public class Main {
         }
     }
 
+    static Main instance;
 
     public static void main(String[] args) {
-        new Main().run();
-        Object runnable = () -> System.out.println("Hi");
-        runnable.render();
+        instance = new Main();
+        instance.run();
     }
 
 
 
     private void handleInput(Character character) {
-        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-            character.moveUp();
-        }
-        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-            character.moveDown();
-        }
+//        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+//            character.moveUp();
+//        }
+//        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+//            character.moveDown();
+//        }
         if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
             character.moveLeft();
         }

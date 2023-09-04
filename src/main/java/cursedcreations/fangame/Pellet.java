@@ -1,16 +1,12 @@
 package cursedcreations.fangame;
 
-import org.lwjgl.stb.STBImage;
-
-import java.nio.ByteBuffer;
-
 import static org.lwjgl.opengl.GL11.*;
 
 
 public class Pellet implements Object {
     int size;
 //    double[][] vertices = new double[4][2];
-    double xmin, ymin;
+    double xmin, ymin, x, y;
 
     public Pellet(int size, double y, double x) {
         this.ymin=y;
@@ -31,10 +27,18 @@ public class Pellet implements Object {
 //        glVertex2f(x, y + height);
 //        glEnd();
         glBegin(GL_QUADS);
-        glVertex2d(0 - xmin,1.0 - ymin);
-        glVertex2d((1.0 / size) - xmin,1.0 - ymin);
-        glVertex2d((1.0 / size) - xmin,1.0-(1.0 / size) - ymin);
-        glVertex2d(0 - xmin,1.0-(1.0 / size) - ymin);
+        x = 0 - xmin;
+        y = 1.0 - ymin;
+        glVertex2d(x, y);
+        x = (1.0 / size) - xmin;
+        y = 1.0 - ymin;
+
+        glVertex2d(x,y);
+        y = 1.0-(1.0 / size) - ymin;
+        glVertex2d(x,y);
+        x = 0 - xmin;
+        y = 1.0-(1.0 / size) - ymin;
+        glVertex2d(x,y);
         glEnd();
     }
     public double getHeight() {
