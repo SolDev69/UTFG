@@ -13,6 +13,12 @@ public class Utils {
     }
 
     static boolean isCollided (Character character, Pellet pellet) {
-        return (character.getX() <= pellet.x) && (pellet.y <= (character.getY()+character.getHeight()));
+        return isAbove(character, pellet)
+                && ((pellet.y-pellet.getHeight()) <= (character.getY()+1/character.getHeight()));
+    }
+
+    private static boolean isAbove(Character character, Pellet pellet) {
+        //print("yes " + character.getX() + " " + pellet.x + " " + (character.getX() + 1.0/character.getWidth()));
+        return ((character.getX() + 1.0 / character.getWidth()) < (pellet.x + 1.0 / pellet.size)) || (pellet.x >= character.getX());
     }
 }

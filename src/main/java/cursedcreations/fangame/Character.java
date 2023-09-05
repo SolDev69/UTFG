@@ -6,8 +6,8 @@ import static cursedcreations.fangame.Utils.print;
 import static org.lwjgl.opengl.GL46.*;
 
 public class Character implements Object {
-    private double width;
-    private double speed;
+    private final double width;
+    private final double speed;
     private double x;
     private double y;
 

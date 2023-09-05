@@ -51,6 +51,8 @@ dependencies {
     runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-par::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
+
+    implementation 'org.newdawn.slick:slick:1.0.2' // Replace with the appropriate Slick2D version
 }
 
 task runGame(type: JavaExec) {

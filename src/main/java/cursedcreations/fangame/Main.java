@@ -2,8 +2,10 @@ package cursedcreations.fangame;
 
 import org.lwjgl.opengl.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
+import static cursedcreations.fangame.Utils.print;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL46.*;
@@ -64,6 +66,10 @@ public class Main {
         while (!glfwWindowShouldClose(window)) {
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the framebuffer
+
+            // Load a TrueType font
+            Font font = new Font("Arial", Font.PLAIN, 18);
+
             instance = this;
             // Rendering code goes here
             int pelletSize=10;
@@ -73,6 +79,7 @@ public class Main {
             pellet.render();
             pellet.ymin = yPos;
             yPos -= pelletFall * pellet.getHeight(); // Move the pellet downwards
+            print(pellet.y + " " + character.getY() + " + " + (pellet.y + 1.0/pellet.size));
             if (yPos > 2.0 || Utils.isCollided(character, pellet)) {
                 yPos = 0.0; // Reset position when pellet goes off-screen
                 xPos = Utils.getRandomDoubleInclusiveD(-.5/pelletSize,.5/pelletSize);
