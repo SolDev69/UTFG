@@ -19,6 +19,8 @@ public class Utils {
 
     private static boolean isAbove(Character character, Pellet pellet) {
         //print("yes " + character.getX() + " " + pellet.x + " " + (character.getX() + 1.0/character.getWidth()));
-        return ((character.getX() + 1.0 / character.getWidth()) >= (pellet.x + 1.0 / pellet.size)) && (pellet.x >= character.getX());
+        return ((character.getX() + 1.0 / character.getWidth()) >= (pellet.x + 1.0 / pellet.size)) && (pellet.x >= character.getX())
+                // || ((pellet.x + 1.0 / pellet.size < ))
+                ;
     }
 }
