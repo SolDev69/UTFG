@@ -54,7 +54,7 @@ dependencies {
 }
 
 task runGame(type: JavaExec) {
-    main = 'cursedcreations.fangame.Main' // Replace with your actual main class package and name
+    main = 'mike.not.pike.Main' // Replace with your actual main class package and name
     classpath sourceSets.main.runtimeClasspath
 }
 

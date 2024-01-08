@@ -1,4 +1,4 @@
-package cursedcreations.fangame;
+package mike.not.pike;
 
 public interface Object {
 

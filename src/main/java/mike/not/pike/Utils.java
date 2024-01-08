@@ -1,4 +1,6 @@
-package cursedcreations.fangame;
+package mike.not.pike;
+
+import java.math.BigInteger;
 
 public class Utils {
     static int getRandomIntInclusiveI(int min, int max) {
@@ -8,8 +10,9 @@ public class Utils {
         return Math.random() * (max - min + 1) + min; // The maximum is inclusive and the minimum is inclusive
     }
 
-    static void print(java.lang.Object o) {
-        System.out.println(o);
+    static void printDebug(java.lang.Object o) {
+        if (Main.debug == true)
+            System.out.println(o);
     }
 
     static boolean isCollided (Character character, Pellet pellet) {
@@ -22,5 +25,13 @@ public class Utils {
         return ((character.getX() + 1.0 / character.getWidth()) >= (pellet.x + 1.0 / pellet.size)) && (pellet.x >= character.getX())
                 // || ((pellet.x + 1.0 / pellet.size < ))
                 ;
+    }
+
+    public static void incrementScore() {
+        incrementScore(1);
+    }
+
+    public static void incrementScore(long incrementBy) {
+        Main.getInstance().setScore(Main.getInstance().getScore().add(BigInteger.valueOf(incrementBy)));
     }
 }

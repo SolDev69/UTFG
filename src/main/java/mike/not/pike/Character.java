@@ -1,8 +1,5 @@
-package cursedcreations.fangame;
+package mike.not.pike;
 
-import java.util.ArrayList;
-
-import static cursedcreations.fangame.Utils.print;
 import static org.lwjgl.opengl.GL46.*;
 
 public class Character implements Object {
@@ -10,6 +7,8 @@ public class Character implements Object {
     private final double speed;
     private double x;
     private double y;
+
+    Main instance = Main.getInstance();
 
     public Character(double x, double y, double speed, double width) {
         this.speed = speed;
@@ -21,28 +20,28 @@ public class Character implements Object {
     public void moveUp() {
         if (y + (1/width) <= 1) {
             y += speed;
-        } else { print(y); }
+        } else { Utils.printDebug(y); }
     }
 
     public void moveDown() {
         if (y >= -1) {
             y -= speed;
-        } else { print(y); }
+        } else { Utils.printDebug(y); }
     }
 
     public void moveLeft() {
-        print("Character x" + x + " pellet x " + Main.instance.pellets.get(Main.instance.pellets.size()-1).x);
+        Utils.printDebug("Character x" + x + " pellet x " + instance.pellets.get(instance.pellets.size()-1).x);
         if (x >= -1) {
             x -= speed;
-        } else { print(x); }
+        } else { Utils.printDebug(x); }
     }
 
     public void moveRight() {
-        print("Character x" + x + " pellet x " + Main.instance.pellets.get(Main.instance.pellets.size()-1).x);
+        Utils.printDebug("Character x" + x + " pellet x " + instance.pellets.get(instance.pellets.size()-1).x);
 
         if (x + (1/width) <= 1) {
             x += speed;
-        } else { print(x); }
+        } else { Utils.printDebug(x); }
     }
 
     public void render() {

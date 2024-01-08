@@ -1,17 +1,28 @@
-package cursedcreations.fangame;
+package mike.not.pike;
 
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL;
 
 import java.awt.*;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Objects;
 
-import static cursedcreations.fangame.Utils.print;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL46.*;
 
 public class Main {
     private long window; // Handle to the window
+    private BigInteger score = BigInteger.ZERO;
+    public void setScore(BigInteger newScore)
+    {
+        score = newScore;
+    }
+
+    public BigInteger getScore()
+    {
+        return score;
+    }
 
     public void run() {
         init();
@@ -79,22 +90,33 @@ public class Main {
             pellet.render();
             pellet.ymin = yPos;
             yPos -= pelletFall * pellet.getHeight(); // Move the pellet downwards
-            print(pellet.y + " " + character.getY() + " + " + (pellet.y + 1.0/pellet.size));
+            Utils.printDebug(pellet.y + " " + character.getY() + " + " + (pellet.y + 1.0/pellet.size));
             if (yPos > 2.0 || Utils.isCollided(character, pellet)) {
                 yPos = 0.0; // Reset position when pellet goes off-screen
                 xPos = Utils.getRandomDoubleInclusiveD(-.5/pelletSize,.5/pelletSize);
+                if (Utils.isCollided(character, pellet)) {
+                    this.score = BigInteger.ZERO;
+                }
             }
             handleInput(character);
             character.render();
             glfwSwapBuffers(window); // Swap the color buffers
             glfwPollEvents(); // Poll for window events
+            Utils.incrementScore();
+            System.out.println("Score: " + this.getScore().toString());
         }
     }
 
-    static Main instance;
-
+    private static Main instance = new Main();
+    public static Main getInstance()
+    {
+        return instance;
+    }
+    static boolean debug = false;
     public static void main(String[] args) {
-        instance = new Main();
+        if (Boolean.getBoolean("debugMode")) {
+            debug = true;
+        }
         instance.run();
     }
 

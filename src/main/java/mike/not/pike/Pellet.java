@@ -1,4 +1,4 @@
-package cursedcreations.fangame;
+package mike.not.pike;
 
 import static org.lwjgl.opengl.GL11.*;
 
